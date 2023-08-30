@@ -6,7 +6,7 @@ class SingletonTS{
         this.random = Math.random();
     }
 
-    public static getInstace(): SingletonTS{
+    public static getInstance(): SingletonTS{
         if (!this.instance) {
             this.instance = new SingletonTS();
         }
@@ -14,8 +14,8 @@ class SingletonTS{
     }
 }
 
-const singleton  = SingletonTS.getInstace()
-const singleton2  = SingletonTS.getInstace()
+const singleton  = SingletonTS.getInstance()
+const singleton2  = SingletonTS.getInstance()
 console.log(singleton)
 console.log(singleton2)
 
