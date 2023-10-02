@@ -89,6 +89,31 @@ class FormBuilder{
     }
 }
 
+class FormDirector{
+
+    constructor(formBuilder){
+        this.setBuilder(formBuilder);    
+    }
+
+    setBuilder(formBuilder){
+        this.formBuilder = formBuilder;
+    }
+
+    createPeopleForm(){
+        this.formBuilder.reset();
+        this.formBuilder.setText("firstName", "Nombre")
+            .setText("lastName", "Apellidos");
+    }
+
+    createContactForm(){
+        this.formBuilder.reset();
+        this.formBuilder.setText("firstName", "Nombre del interesado")
+                        .setEmail("email", "Correo electronico")
+                        .setText("message", "Mensaje");
+    }
+
+}
+
 const frmBuilder = new FormBuilder();
 const formPeople = frmBuilder.setAction('add.php')
                             .setText("firstName", "Nombre")
@@ -97,10 +122,21 @@ const formPeople = frmBuilder.setAction('add.php')
                             .setColor("favoriteColor", "Color favorito")
                             .build();
 
+form1.innerHTML = formPeople.getContent()
+
 const formMail = frmBuilder.setAction("send.php")
     .setText("name", "Nombre")
     .setEmail("email", "Correo electronico")
     .build()
 
-form1.innerHTML = formPeople.getContent()
 form2.innerHTML = formMail.getContent()
+
+const director = new FormDirector(frmBuilder)
+director.createPeopleForm()
+form3.innerHTML = frmBuilder.build().getContent()
+
+director.createPeopleForm()
+form4.innerHTML = frmBuilder.build().getContent()
+
+director.createContactForm()
+form5.innerHTML = frmBuilder.build().getContent()
